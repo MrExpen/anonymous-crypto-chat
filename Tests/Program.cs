@@ -1,6 +1,5 @@
 ﻿using CryptoChat.Core.Controllers;
 using CryptoChat.Core.Interfaces;
-using CryptoChat.Core.Models;
 using CryptoChat.Core.Services;
 using Newtonsoft.Json;
 
@@ -14,5 +13,3 @@ var encryptedMessage = myMessageController.PrepareMessage("Hello world!", friend
 var decryptedMessage = friendMessageController.DecryptAndVerifyMessage(encryptedMessage);
 
 Console.WriteLine(JsonConvert.SerializeObject(decryptedMessage, Formatting.Indented));
-
-

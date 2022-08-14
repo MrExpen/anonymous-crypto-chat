@@ -18,7 +18,7 @@ public static class CryptoServiceFactory
 
     private static ICryptoService _GetCryptoService(int version, string? publicKey = null, string? privateKey = null)
     {
-        var service = version switch
+        ICryptoService service = version switch
         {
             1 => new CryptoService(GetLowLevelCryptoService(1)),
             _ => throw new VersionNotFoundException()

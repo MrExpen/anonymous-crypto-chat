@@ -13,14 +13,11 @@ public class BasicMessageController : IMessageController
 
     public ICryptoService CryptoService { get; set; }
 
-    private static ICryptoService GetCryptoServiceFor(int version, string publicKey) =>
-        CryptoServiceFactory.GetCryptoService(version, publicKey);
-
     public EncryptedSignedMessage PrepareMessage(string message, string publicKey, string encodingName,
         string hashAlgorithmName)
     {
         var encryptedMessage =
-            GetCryptoServiceFor(Config.CURRENT_VERSION, publicKey).EncryptMessage(message, encodingName);
+            CryptoServiceFactory.GetCryptoService(Config.CURRENT_VERSION, publicKey).EncryptMessage(message, encodingName);
         return new EncryptedSignedMessage
         {
             Encoding = encodingName,
@@ -38,7 +35,11 @@ public class BasicMessageController : IMessageController
         {
             From = encryptedMessage.PublicKeyFrom,
             Text = CryptoService.DecryptMessage(encryptedMessage),
-            Signed = GetCryptoServiceFor(encryptedMessage.ProtocolVersion, encryptedMessage.PublicKeyFrom)
-                .VerifyMessage(encryptedMessage)
+            Signed = CryptoServiceFactory.GetCryptoService(encryptedMessage.ProtocolVersion, encryptedMessage.PublicKeyFrom)
+                .VerifyFromMe(encryptedMessage)
         };
+
+    public static bool VerifyMessage(EncryptedSignedMessage encryptedSignedMessage) =>
+        CryptoServiceFactory.GetCryptoService(encryptedSignedMessage.ProtocolVersion, encryptedSignedMessage.PublicKeyFrom)
+            .VerifyFromMe(encryptedSignedMessage);
 }

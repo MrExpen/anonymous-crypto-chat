@@ -12,7 +12,7 @@ public interface ICryptoService
     string EncryptMessage(string message, string encodingName);
     string DecryptMessage(string encryptedMessage, string encodingName);
     string SignMessage(string message, string hashAlgorithmName);
-    bool VerifyMessage(EncryptedSignedMessage message);
+    bool VerifyFromMe(EncryptedSignedMessage message);
 
     string DecryptMessage(EncryptedSignedMessage message) =>
         DecryptMessage(message.Message, message.Encoding);
