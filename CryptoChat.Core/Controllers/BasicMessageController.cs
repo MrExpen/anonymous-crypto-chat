@@ -2,7 +2,7 @@
 using CryptoChat.Core.Models;
 using CryptoChat.Core.Services;
 
-namespace CryptoChat.Core;
+namespace CryptoChat.Core.Controllers;
 
 public class BasicMessageController : IMessageController
 {
@@ -13,8 +13,8 @@ public class BasicMessageController : IMessageController
 
     public ICryptoService CryptoService { get; set; }
 
-    protected virtual ICryptoService GetCryptoServiceFor(int version, string publicKey, string? privateKey = null) =>
-        CryptoServiceFactory.GetCryptoService(version, publicKey, privateKey);
+    private static ICryptoService GetCryptoServiceFor(int version, string publicKey) =>
+        CryptoServiceFactory.GetCryptoService(version, publicKey);
 
     public EncryptedSignedMessage PrepareMessage(string message, string publicKey, string encodingName,
         string hashAlgorithmName)

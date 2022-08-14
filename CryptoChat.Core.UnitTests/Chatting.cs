@@ -1,4 +1,5 @@
-﻿using CryptoChat.Core.Interfaces;
+﻿using CryptoChat.Core.Controllers;
+using CryptoChat.Core.Interfaces;
 using CryptoChat.Core.Services;
 using FluentAssertions;
 
