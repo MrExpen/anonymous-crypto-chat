@@ -4,7 +4,7 @@ namespace CryptoChat.Core.Interfaces;
 
 public interface IMessageController
 {
-    ICryptoService MyCryptoService { get; set; }
+    ICryptoService CryptoService { get; set; }
 
     EncryptedSignedMessage PrepareMessage(string message, string publicKey,
         string encodingName = Config.DEFAULT_ENCODING,

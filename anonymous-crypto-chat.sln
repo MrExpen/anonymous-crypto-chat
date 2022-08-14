@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoChat.Core", "CryptoCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D379F64A-10DA-4DC5-BEDD-EF64B3CAD7B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoChat.Core.UnitTests", "CryptoChat.Core.UnitTests\CryptoChat.Core.UnitTests.csproj", "{4E2F9671-8949-493F-AE0C-2BF7CB843EF5}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -18,6 +20,8 @@ Global
 		{5D81AE0B-20A1-4A37-8E35-21A0475E5A72}.|Any CPU.Build.0 = |Any CPU
 		{D379F64A-10DA-4DC5-BEDD-EF64B3CAD7B8}.|Any CPU.ActiveCfg = Debug|Any CPU
 		{D379F64A-10DA-4DC5-BEDD-EF64B3CAD7B8}.|Any CPU.Build.0 = Debug|Any CPU
+		{4E2F9671-8949-493F-AE0C-2BF7CB843EF5}.|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2F9671-8949-493F-AE0C-2BF7CB843EF5}.|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		|Any CPU = |Any CPU

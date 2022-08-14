@@ -36,4 +36,6 @@ public class CryptoService : ICryptoService
     public bool VerifyMessage(EncryptedSignedMessage message) =>
         _lCryptoService.VerifyData(Encoding.ASCII.GetBytes(message.Message + message.PublicKeyFrom),
             Convert.FromBase64String(message.Signature), new HashAlgorithmName(message.HashAlgorithm));
+    
+    
 }

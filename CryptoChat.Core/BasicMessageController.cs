@@ -6,12 +6,12 @@ namespace CryptoChat.Core;
 
 public class BasicMessageController : IMessageController
 {
-    public BasicMessageController(ICryptoService myCryptoService)
+    public BasicMessageController(ICryptoService cryptoService)
     {
-        MyCryptoService = myCryptoService;
+        CryptoService = cryptoService;
     }
 
-    public ICryptoService MyCryptoService { get; set; }
+    public ICryptoService CryptoService { get; set; }
 
     protected virtual ICryptoService GetCryptoServiceFor(int version, string publicKey, string? privateKey = null) =>
         CryptoServiceFactory.GetCryptoService(version, publicKey, privateKey);
@@ -26,9 +26,9 @@ public class BasicMessageController : IMessageController
             Encoding = encodingName,
             HashAlgorithm = hashAlgorithmName,
             PublicKeyTo = publicKey,
-            PublicKeyFrom = MyCryptoService.PublicKey,
+            PublicKeyFrom = CryptoService.PublicKey,
             Message = encryptedMessage,
-            Signature = MyCryptoService.SignMessage(encryptedMessage, hashAlgorithmName),
+            Signature = CryptoService.SignMessage(encryptedMessage, hashAlgorithmName),
             ProtocolVersion = Config.CURRENT_VERSION
         };
     }
@@ -37,7 +37,7 @@ public class BasicMessageController : IMessageController
         new()
         {
             From = encryptedMessage.PublicKeyFrom,
-            Text = MyCryptoService.DecryptMessage(encryptedMessage),
+            Text = CryptoService.DecryptMessage(encryptedMessage),
             Signed = GetCryptoServiceFor(encryptedMessage.ProtocolVersion, encryptedMessage.PublicKeyFrom)
                 .VerifyMessage(encryptedMessage)
         };
