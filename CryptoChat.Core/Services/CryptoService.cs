@@ -8,6 +8,7 @@ namespace CryptoChat.Core.Services;
 public class CryptoService : ICryptoService
 {
     private readonly ILowLevelCryptoService _lCryptoService;
+    private ICryptoService _cryptoServiceImplementation;
 
     public CryptoService(ILowLevelCryptoService lCryptoService)
     {
@@ -29,10 +30,10 @@ public class CryptoService : ICryptoService
         Encoding.GetEncoding(encodingName).GetString(_lCryptoService.DecryptData(Convert.FromBase64String(encryptedMessage)));
 
     public string SignMessage(string data, string hashAlgorithmName) =>
-        Convert.ToBase64String(_lCryptoService.SignData(Convert.FromBase64String(data + PublicKey),
+        Convert.ToBase64String(_lCryptoService.SignData(Encoding.ASCII.GetBytes(data + PublicKey),
             new HashAlgorithmName(hashAlgorithmName)));
 
     public bool VerifyMessage(EncryptedSignedMessage message) =>
-        _lCryptoService.VerifyData(Convert.FromBase64String(message.Message + message.PublicKeyFrom),
+        _lCryptoService.VerifyData(Encoding.ASCII.GetBytes(message.Message + message.PublicKeyFrom),
             Convert.FromBase64String(message.Signature), new HashAlgorithmName(message.HashAlgorithm));
 }

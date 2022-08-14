@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Security.Cryptography;
 using CryptoChat.Core.Interfaces;
 
 namespace CryptoChat.Core.Services;
@@ -28,5 +29,16 @@ public static class CryptoServiceFactory
             service.ImportPrivateKey(privateKey);
 
         return service;
+    }
+
+    public static ICryptoService GenerateCryptoService(int keySize)
+    {
+        var rsaCryptoServiceProvider = new RSACryptoServiceProvider(keySize);
+
+        return GetCryptoService(
+            Config.CURRENT_VERSION,
+            Convert.ToBase64String(rsaCryptoServiceProvider.ExportRSAPublicKey()),
+            Convert.ToBase64String(rsaCryptoServiceProvider.ExportRSAPrivateKey())
+        );
     }
 }
